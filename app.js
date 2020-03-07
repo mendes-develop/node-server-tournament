@@ -1,0 +1,11 @@
+const express = require("express");
+
+
+const PORT = process.env.PORT || 3001
+const app = express();
+
+//Routes
+
+
+// App listening to the server
+app.listen((PORT), () => console.log("Running on port 3001"))
