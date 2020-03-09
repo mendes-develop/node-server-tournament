@@ -1,24 +1,24 @@
+require("dotenv/config");
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
-require('dotenv/config')
-
+const cors = require("cors");
+const usersRoute = require("./routes-controller/users");
 const PORT = process.env.PORT || 3001;
 
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-//Routes are going to come here
-app.get("/", (req, resp) => {
-    resp.send("<h1>We are running the ' / ' page.</h1>");
-});
+//Routes Middleware
+app.use("/users", usersRoute);
 
 //Connect to MongoDB
 mongoose.connect(
   process.env.ATLAS_URI,
-  { useUnifiedTopology: true, useNewUrlParser: true },
-  () => {
-    console.log("Connected to MongoBD");
-  }
-);
+  { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true },
+  () => console.log("Connected to MongoBD")
+).catch(err => console.log(err));
 
 // App listening to the server
 app.listen(PORT, () => console.log(`Running on port ${PORT}`));
