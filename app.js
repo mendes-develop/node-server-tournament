@@ -21,4 +21,7 @@ mongoose.connect(
 ).catch(err => console.log(err));
 
 // App listening to the server
-app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Running on port ${PORT}`)
+  console.log("Press 'Control' + 'C' to exit")
+});
